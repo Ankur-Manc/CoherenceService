@@ -44,6 +44,18 @@ async function generatePrompt(filters_applied, current_query, past_queries) {
     - \`brand\` - Product brands
     - \`rating\` - Customer rating thresholds
     - \`gender\` - Customer rating thresholds
+<<<<<<< HEAD
+=======
+
+    ## Guidelines
+
+    1. **Relevance First**: Only recommend filters that clearly align with observed patterns
+    2. **Confidence Scoring**: Use 0-1 scale where 1.0 = extremely confident, 0.5 = moderate confidence
+    3. **Reasoning**: Always explain why each filter is recommended
+    4. **Limit Recommendations**: Provide 3-7 filter recommendations maximum
+    5. **Context Awareness**: Consider if current filters conflict with or complement your suggestions
+    6. **Graceful Degradation**: If insufficient data, recommend broad but helpful filters
+>>>>>>> 78ad4d808858b2b3353c8a25203480654acf0745
 
     Now analyze the provided data and return your filter recommendations following this structure.
       `;
