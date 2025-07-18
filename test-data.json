@@ -1,0 +1,16 @@
+{
+  "filters": [
+    {
+      "name": "price",
+      "id": "p_23",
+      "values": ["low", "medium", "high"]
+    },
+    {
+      "name": "brands",
+      "id": "p_343",
+      "values": ["Nike", "PUMA"]
+    }
+  ],
+  "currentQuery": "shirts for men",
+  "pastQueries": ["running shirts", "tshirts"]
+}

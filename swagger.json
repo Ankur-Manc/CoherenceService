@@ -1,0 +1,299 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Coherence Service API",
+    "version": "1.0.0",
+    "description": "API documentation for the Coherence Service that integrates with Cohere AI"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Development server"
+    }
+  ],
+  "paths": {
+    "/test": {
+      "post": {
+        "summary": "Test endpoint",
+        "description": "Simple test endpoint to verify the API is working",
+        "responses": {
+          "200": {
+            "description": "Test successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Test route working"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health check endpoint",
+        "description": "Check if the service is up and running",
+        "responses": {
+          "200": {
+            "description": "Service is healthy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/select-filters": {
+      "post": {
+        "summary": "Select relevant filters",
+        "description": "Uses Cohere AI to select the most relevant filters based on user query and past queries",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["filters", "query", "pastQueries"],
+                "properties": {
+                  "filters": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Array of available filters"
+                  },
+                  "query": {
+                    "type": "string",
+                    "description": "Current user query"
+                  },
+                  "pastQueries": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Array of past user queries"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully selected filters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "selectedFilters": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request parameters"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/generate-filtered": {
+      "post": {
+        "summary": "Generate filtered recommendations using Cohere AI",
+        "description": "Generates recommendations based on applied filters, current query, and past queries using Cohere's AI models",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["current_query"],
+                "properties": {
+                  "filters_applied": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Array of currently applied filters"
+                  },
+                  "current_query": {
+                    "type": "string",
+                    "description": "The current search query"
+                  },
+                  "past_queries": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Array of past search queries"
+                  },
+                  "model": {
+                    "type": "string",
+                    "description": "The Cohere model to use",
+                    "default": "command"
+                  },
+                  "temperature": {
+                    "type": "number",
+                    "description": "Controls randomness in the output",
+                    "default": 0.7
+                  },
+                  "maxTokens": {
+                    "type": "number",
+                    "description": "Maximum number of tokens to generate",
+                    "default": 300
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully generated filtered recommendations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string",
+                      "description": "Generated recommendations"
+                    },
+                    "model": {
+                      "type": "string",
+                      "description": "Model used for generation"
+                    },
+                    "prompt": {
+                      "type": "string",
+                      "description": "Generated prompt"
+                    },
+                    "filters_applied": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Filters that were applied"
+                    },
+                    "current_query": {
+                      "type": "string",
+                      "description": "Current query used"
+                    },
+                    "past_queries": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Past queries used"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing required parameters"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/api/generate": {
+      "post": {
+        "summary": "Generate text using Cohere AI",
+        "description": "Generates text based on the provided prompt using Cohere's AI models",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["prompt"],
+                "properties": {
+                  "prompt": {
+                    "type": "string",
+                    "description": "The prompt to generate text from"
+                  },
+                  "model": {
+                    "type": "string",
+                    "description": "The Cohere model to use",
+                    "default": "command"
+                  },
+                  "temperature": {
+                    "type": "number",
+                    "description": "Controls randomness in the output",
+                    "default": 0.7
+                  },
+                  "maxTokens": {
+                    "type": "number",
+                    "description": "Maximum number of tokens to generate",
+                    "default": 300
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully generated text",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "text": {
+                      "type": "string",
+                      "description": "Generated text"
+                    },
+                    "model": {
+                      "type": "string",
+                      "description": "Model used for generation"
+                    },
+                    "prompt": {
+                      "type": "string",
+                      "description": "Original prompt"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing or invalid prompt"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    }
+  }
+}

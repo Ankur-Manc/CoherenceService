@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Coherence Service API Documentation</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 { 
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .endpoint {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            margin: 20px 0;
+            padding: 20px;
+        }
+        .method {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 3px;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .get { background-color: #28a745; }
+        .post { background-color: #007bff; }
+        .path {
+            font-family: monospace;
+            font-size: 1.1em;
+            color: #333;
+        }
+        .description {
+            margin: 10px 0;
+            color: #666;
+        }
+        .params {
+            margin-left: 20px;
+        }
+        .param-name {
+            font-weight: bold;
+            color: #333;
+        }
+        pre {
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Coherence Service API Documentation</h1>
+
+    <div class="endpoint">
+        <span class="method get">GET</span>
+        <span class="path">/health</span>
+        <div class="description">Check if the service is up and running</div>
+        <h4>Response:</h4>
+        <pre>
+{
+    "status": "ok"
+}
+        </pre>
+    </div>
+
+    <div class="endpoint">
+        <span class="method post">POST</span>
+        <span class="path">/test</span>
+        <div class="description">Simple test endpoint to verify the API is working</div>
+        <h4>Response:</h4>
+        <pre>
+{
+    "message": "Test route working"
+}
+        </pre>
+    </div>
+
+    <div class="endpoint">
+        <span class="method post">POST</span>
+        <span class="path">/api/select-filters</span>
+        <div class="description">Uses Cohere AI to select the most relevant filters based on user query and past queries</div>
+        <h4>Request Body:</h4>
+        <div class="params">
+            <div><span class="param-name">filters</span>: Array of available filters</div>
+            <div><span class="param-name">query</span>: Current user query</div>
+            <div><span class="param-name">pastQueries</span>: Array of past user queries</div>
+        </div>
+        <h4>Example Request:</h4>
+        <pre>
+{
+    "filters": ["category1", "category2", "category3"],
+    "query": "search query",
+    "pastQueries": ["previous query 1", "previous query 2"]
+}
+        </pre>
+        <h4>Response:</h4>
+        <pre>
+{
+    "selectedFilters": ["category1", "category3"]
+}
+        </pre>
+    </div>
+
+    <div class="endpoint">
+        <span class="method post">POST</span>
+        <span class="path">/api/generate</span>
+        <div class="description">Generates text based on the provided prompt using Cohere's AI models</div>
+        <h4>Request Body:</h4>
+        <div class="params">
+            <div><span class="param-name">prompt</span>: The prompt to generate text from</div>
+            <div><span class="param-name">model</span>: The Cohere model to use (default: "command")</div>
+            <div><span class="param-name">temperature</span>: Controls randomness in the output (default: 0.7)</div>
+            <div><span class="param-name">maxTokens</span>: Maximum number of tokens to generate (default: 300)</div>
+        </div>
+        <h4>Example Request:</h4>
+        <pre>
+{
+    "prompt": "Write a short story about",
+    "model": "command",
+    "temperature": 0.7,
+    "maxTokens": 300
+}
+        </pre>
+        <h4>Response:</h4>
+        <pre>
+{
+    "text": "Generated text response",
+    "model": "command",
+    "prompt": "Write a short story about"
+}
+        </pre>
+    </div>
+</body>
+</html>
