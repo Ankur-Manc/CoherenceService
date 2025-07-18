@@ -9,10 +9,10 @@ export async function generatePrompt(filters_applied, current_query, past_querie
 
     You will receive the following parameters:
 
-    **Current Filters:** ${JSON.stringify(filters)}
+    **Current Filters:** ${filters_applied}
     **Current Query:** "${current_query}"
     **Past Queries:**
-    ${JSON.stringify(queries)}
+    ${past_queries}
 
     ## Your Mission
 
