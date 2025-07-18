@@ -1,7 +1,4 @@
-async function generatePrompt(filters_applied, current_query, past_queries) {
-  // Handle undefined or null values
-  const filters = filters_applied || [];
-  const queries = past_queries || [];
+export async function generatePrompt(filters_applied, current_query, past_queries) {
 
   return `
     # Amazon Filter Recommendation System Prompt
@@ -42,14 +39,12 @@ async function generatePrompt(filters_applied, current_query, past_queries) {
     
     ## Filter Types Available
 
-    Common filter types you can recommend:
+    Filter types you can recommend:
     - \`price\` - Price brackets
     - \`brand\` - Product brands
     - \`rating\` - Customer rating thresholds
     - \`gender\` - Customer rating thresholds
 
-    Now analyze the provided data and return your filter recommendations following this structure.
+    Now analyze the provided data and return your filter recommendations.
       `;
 }
-
-export { generatePrompt };

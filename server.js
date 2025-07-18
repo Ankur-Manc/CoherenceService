@@ -53,13 +53,13 @@ app.get('/health', (req, res) => {
 // Endpoint to generate filtered recommendations
 app.post('/api/generate-filtered', async (req, res) => {
   try {
-    const { 
-      filters_applied, 
-      current_query, 
+    const {
+      filters_applied,
+      current_query,
       past_queries,
       model = 'command',
       temperature = 0.7,
-      maxTokens = 3000 
+      maxTokens = 3000
     } = req.body;
 
     // Validate required parameters
@@ -100,9 +100,9 @@ app.post('/api/generate-filtered', async (req, res) => {
     });
   } catch (error) {
     console.error('Error:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       error: 'Failed to generate filtered response',
-      details: error.message 
+      details: error.message
     });
   }
 });
@@ -129,9 +129,9 @@ app.post('/api/generate', async (req, res) => {
     });
   } catch (error) {
     console.error('Error:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       error: 'Failed to generate response',
-      details: error.message 
+      details: error.message
     });
   }
 });
