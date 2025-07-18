@@ -27,7 +27,7 @@ export function createBrandFilter(brandId, name, selected = false) {
     brandId,
     name,
     selected,
-    parameterFormat: `p_123:${brandId}` // e.g. p_123:310579
+    parameterFormat: `&p_123:${brandId}` // e.g. p_123:310579
   };
 }
 
@@ -56,7 +56,7 @@ export function createGenderFilter(gender, productType, selected = false) {
     genderId,
     productId,
     selected,
-    parameterFormat: `n:${productId},p_n_feature_thirty-two_browse-bin:${genderId}`
+    parameterFormat: `&rh=n:${productId},p_n_feature_thirty-two_browse-bin:${genderId}`
     // Male Jeans: n:21512907011,p_n_feature_thirty-two_browse-bin:121075132011
     // Male Shirts: n:7141123011,p_n_feature_thirty-two_browse-bin:121075132011
     // Female Jeans: n:21512907011,p_n_feature_thirty-two_browse-bin:121075131011
