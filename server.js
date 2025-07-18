@@ -68,12 +68,21 @@ app.post('/api/generate-filtered', async (req, res) => {
     }
 
     // Generate the specialized prompt
+    console.log('Generating prompt with:', {
+      filters_applied: filters_applied || [],
+      current_query,
+      past_queries: past_queries || []
+    });
+    
     const prompt = await generatePrompt(
       filters_applied || [],
       current_query,
       past_queries || []
     );
+    
+    console.log('Generated prompt:', prompt);
 
+    console.log('Sending to Deepseek API');
     // Send to Deepseek
     const response = await callDeepseekAPI(
       [{ role: 'user', content: prompt }],
