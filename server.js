@@ -17,20 +17,27 @@ const port = process.env.PORT || 3000;
 const DEEPSEEK_API_KEY = 'sk-371264b5af764190bdbf3c34536a716d';
 const DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions';
 
-// Helper function to call Deepseek API
-async function callDeepseekAPI(messages, temperature, maxTokens) {
+// Helper function to call Deepseek API with structured JSON output
+async function callDeepseekAPI(messages, temperature, maxTokens, useStructuredOutput = false) {
+  const requestBody = {
+    model: 'deepseek-chat',
+    messages,
+    temperature,
+    max_tokens: maxTokens
+  };
+
+  // Add structured output for JSON responses
+  if (useStructuredOutput) {
+    requestBody.response_format = { type: "json_object" };
+  }
+
   const response = await fetch(DEEPSEEK_API_URL, {
     method: 'POST',
     headers: {
       'Authorization': `Bearer ${DEEPSEEK_API_KEY}`,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      model: 'deepseek-chat',
-      messages,
-      temperature,
-      max_tokens: maxTokens
-    })
+    body: JSON.stringify(requestBody)
   });
 
   if (!response.ok) {
@@ -83,11 +90,12 @@ app.post('/api/generate-filtered', async (req, res) => {
     console.log('Generated prompt:', prompt);
 
     console.log('Sending to Deepseek API');
-    // Send to Deepseek
+    // Send to Deepseek with structured JSON output
     const response = await callDeepseekAPI(
       [{ role: 'user', content: prompt }],
       temperature,
-      maxTokens
+      maxTokens,
+      true // Enable structured output for JSON
     );
 
     res.json({
