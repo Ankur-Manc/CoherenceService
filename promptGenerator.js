@@ -118,7 +118,6 @@ async function generatePrompt(filters_applied, current_query, past_queries) {
     - \`brand\` - Product brands
     - \`rating\` - Customer rating thresholds
     - \`gender\` - Customer rating thresholds
-    - \`size\` - Product dimensions/sizing
 
     ## Guidelines
 
