@@ -65,7 +65,7 @@ app.post('/api/generate-filtered', async (req, res) => {
       current_query,
       past_queries,
       model = 'command',
-      temperature = 0.7,
+      temperature = 0.1,
       maxTokens = 3000
     } = req.body;
 
