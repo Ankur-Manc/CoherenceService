@@ -11,8 +11,7 @@ export async function generatePrompt(filters_applied, current_query, past_querie
 
     **Current Filters:** ${filters_applied}
     **Current Query:** "${current_query}"
-    **Past Queries:**
-    ${past_queries}
+    **Past Queries:** ${past_queries}
 
     ## Your Mission
 
@@ -34,8 +33,7 @@ export async function generatePrompt(filters_applied, current_query, past_querie
 
     ## Response Format
 
-    Only return your filter recommendations in the same JSON structure format as the current filters that were given as input
-
+    Only return your filter recommendations in the exact same JSON structure format as the current filters that were given as input
     
     ## Filter Types Available
 

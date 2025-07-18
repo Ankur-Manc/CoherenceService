@@ -118,7 +118,7 @@ app.post('/api/generate-filtered', async (req, res) => {
 // Main endpoint to handle prompts
 app.post('/api/generate', async (req, res) => {
   try {
-    const { prompt, model = 'command', temperature = 0.7, maxTokens = 3000 } = req.body;
+    const { prompt, model = 'command', temperature = 0.1, maxTokens = 3000 } = req.body;
 
     if (!prompt) {
       return res.status(400).json({ error: 'Prompt is required' });
