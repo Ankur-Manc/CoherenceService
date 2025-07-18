@@ -38,7 +38,7 @@ export function createPriceRangeFilter(lowPrice, highPrice, selected = false) {
     lowPrice,
     highPrice,
     selected,
-    parameterFormat: `low-price=${lowPrice}&high-price=${highPrice}` // e.g. low-price=18&high-price=175
+    parameterFormat: `&ref=is_r_p_36_0_0&low-price=${lowPrice}&high-price=${highPrice}` // e.g. &ref=is_r_p_36_0_0&low-price=18&high-price=175
   };
 }
 
@@ -73,12 +73,12 @@ export function createCustomerReviewFilter(stars, selected = false) {
     stars,
     reviewId,
     selected,
-    parameterFormat: `${AMAZON_FILTER_IDS.CUSTOMER_REVIEWS}:${reviewId}`
-    // 5 star: p_72:2661617011
-    // 4 stars: p_72:2661618011
-    // 3 stars: p_72:2661619011
-    // 2 stars: p_72:2661620011
-    // 1 star: p_72:2661621011
+    parameterFormat: `&rh=${AMAZON_FILTER_IDS.CUSTOMER_REVIEWS}:${reviewId}`
+    // 5 star: &rh=p_72:2661617011
+    // 4 stars: &rh=p_72:2661618011
+    // 3 stars: &rh=p_72:2661619011
+    // 2 stars: &rh=p_72:2661620011
+    // 1 star: &rh=p_72:2661621011
   };
 }
 
