@@ -14,7 +14,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Initialize Deepseek API configuration
-const DEEPSEEK_API_KEY = 'sk-371264b5af764190bdbf3c34536a716d';
+const DEEPSEEK_API_KEY = '***********';
 const DEEPSEEK_API_URL = 'https://api.deepseek.com/v1/chat/completions';
 
 // Helper function to call Deepseek API with structured JSON output
